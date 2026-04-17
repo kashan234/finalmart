@@ -11,6 +11,7 @@ export interface CartItem {
   quantity: number;
   image?: string;
   type: "mart" | "food" | "pharmacy";
+  available?: boolean;
 }
 
 export interface CartValidationResult {
@@ -229,7 +230,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             if (!old) return true;
             return old.price !== newItem.price
               || old.quantity !== newItem.quantity
-              || old.available !== newItem.available;
+              || (old.available ?? true) !== (newItem.available ?? true);
           });
           if (hasRealChange) {
             save(data.items);

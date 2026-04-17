@@ -142,8 +142,14 @@ function decodeJwtExp(tok: string): number | null {
     let jsonStr: string;
     if (typeof atob === "function") {
       jsonStr = atob(b64);
+    } else if (typeof (globalThis as any).Buffer === "function") {
+      try {
+        jsonStr = (globalThis as any).Buffer.from(b64, "base64").toString("binary");
+      } catch {
+        return null;
+      }
     } else {
-      jsonStr = Buffer.from(b64, "base64").toString("binary");
+      return null;
     }
     const payload = JSON.parse(jsonStr);
     return typeof payload.exp === "number" ? payload.exp : null;

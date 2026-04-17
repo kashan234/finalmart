@@ -998,7 +998,7 @@ export function RideTracker({
                     {vehiclePlate && (
                       <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4 }}>
                         <View style={{ backgroundColor: colorScheme === "dark" ? "rgba(255,255,255,0.1)" : "#F1F5F9", borderRadius: 6, paddingHorizontal: 8, paddingVertical: 3, borderWidth: 1, borderColor: colorScheme === "dark" ? "rgba(255,255,255,0.15)" : "#E2E8F0" }}>
-                          <Text style={{ fontFamily: "Inter_700Bold", fontSize: 11, color: colorScheme === "dark" ? "#fff" : "#0F172A", letterSpacing: 1 }}>{vehiclePlate}</Text>
+                          <Text style={{ fontFamily: "Inter_700Bold", fontSize: 11, color: colorScheme === "dark" ? "#fff" : "#0F172A", letterSpacing: 1 }}>{String(vehiclePlate)}</Text>
                         </View>
                       </View>
                     )}
