@@ -30,6 +30,14 @@ export interface Ride {
   riderLng?: number;
   riderLocAge?: number;
   bids?: RideBidsItem[];
+  broadcastTimeoutSec?: number;
+  estimatedFare?: number;
+  minOffer?: number;
+  riderAvgRating?: number;
+  vehicleModel?: string;
+  vehicleColor?: string;
+  tripOtp?: string;
+  otpVerified?: boolean;
   paymentMethod: RidePaymentMethod;
   createdAt: string;
 }

@@ -10,8 +10,11 @@ export type RideStatus = (typeof RideStatus)[keyof typeof RideStatus];
 
 export const RideStatus = {
   searching: "searching",
-  confirmed: "confirmed",
+  accepted: "accepted",
+  arrived: "arrived",
   in_progress: "in_progress",
   completed: "completed",
   cancelled: "cancelled",
+  no_riders: "no_riders",
+  bargaining: "bargaining",
 } as const;

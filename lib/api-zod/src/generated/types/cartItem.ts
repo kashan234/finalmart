@@ -12,4 +12,5 @@ export interface CartItem {
   price: number;
   quantity: number;
   image?: string;
+  available?: boolean;
 }

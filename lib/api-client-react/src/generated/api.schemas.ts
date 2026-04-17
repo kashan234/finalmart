@@ -115,6 +115,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   image?: string;
+  available?: boolean;
 }
 
 export type OrderType = (typeof OrderType)[keyof typeof OrderType];
@@ -362,10 +363,13 @@ export type RideStatus = (typeof RideStatus)[keyof typeof RideStatus];
 
 export const RideStatus = {
   searching: "searching",
-  confirmed: "confirmed",
+  accepted: "accepted",
+  arrived: "arrived",
   in_progress: "in_progress",
   completed: "completed",
   cancelled: "cancelled",
+  no_riders: "no_riders",
+  bargaining: "bargaining",
 } as const;
 
 export type RideBidsItem = { [key: string]: unknown };
@@ -398,6 +402,14 @@ export interface Ride {
   riderLng?: number;
   riderLocAge?: number;
   bids?: RideBidsItem[];
+  broadcastTimeoutSec?: number;
+  estimatedFare?: number;
+  minOffer?: number;
+  riderAvgRating?: number;
+  vehicleModel?: string;
+  vehicleColor?: string;
+  tripOtp?: string;
+  otpVerified?: boolean;
   paymentMethod: RidePaymentMethod;
   createdAt: string;
 }
@@ -571,6 +583,7 @@ export interface CreatePharmacyOrderRequest {
 export interface PharmacyOrderResponse {
   id: string;
   status: string;
+  total?: number;
   estimatedMinutes?: number;
 }
 

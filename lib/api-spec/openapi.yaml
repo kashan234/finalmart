@@ -868,6 +868,8 @@ components:
           type: number
         image:
           type: string
+        available:
+          type: boolean
       required: [productId, name, price, quantity]
 
     Order:
@@ -1193,7 +1195,7 @@ components:
           enum: [car, bike]
         status:
           type: string
-          enum: [searching, confirmed, in_progress, completed, cancelled]
+          enum: [searching, accepted, arrived, in_progress, completed, cancelled, no_riders, bargaining]
         pickupAddress:
           type: string
         dropAddress:
@@ -1226,6 +1228,22 @@ components:
           type: array
           items:
             type: object
+        broadcastTimeoutSec:
+          type: number
+        estimatedFare:
+          type: number
+        minOffer:
+          type: number
+        riderAvgRating:
+          type: number
+        vehicleModel:
+          type: string
+        vehicleColor:
+          type: string
+        tripOtp:
+          type: string
+        otpVerified:
+          type: boolean
         paymentMethod:
           type: string
           enum: [cash, wallet]
@@ -1448,6 +1466,8 @@ components:
           type: string
         status:
           type: string
+        total:
+          type: number
         estimatedMinutes:
           type: integer
       required: [id, status]

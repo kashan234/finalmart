@@ -9,5 +9,6 @@
 export interface PharmacyOrderResponse {
   id: string;
   status: string;
+  total?: number;
   estimatedMinutes?: number;
 }
