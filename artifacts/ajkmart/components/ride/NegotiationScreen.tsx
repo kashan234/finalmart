@@ -137,6 +137,7 @@ export function NegotiationScreen({
   const colorScheme = useColorScheme();
   const C = colorScheme === "dark" ? Colors.dark : Colors.light;
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const topPad = Platform.OS === "web" ? 67 : insets.top;
   const { showToast } = useToast();
 

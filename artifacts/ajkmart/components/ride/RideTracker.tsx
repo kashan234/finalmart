@@ -218,12 +218,12 @@ export function RideTracker({
   }, [ride?.status, acceptedAt]);
 
   useEffect(() => {
-    if (ride?.status === "confirmed" && (ride as any)?.tripOtp && !tripOtp) setTripOtp((ride as any).tripOtp);
-    if (ride?.status === "in_progress" && (ride as any)?.otpVerified) setTripOtp(null);
+    if (String(ride?.status) === "confirmed" && (ride as any)?.tripOtp && !tripOtp) setTripOtp((ride as any).tripOtp);
+    if (String(ride?.status) === "in_progress" && (ride as any)?.otpVerified) setTripOtp(null);
   }, [ride?.status, (ride as any)?.tripOtp, (ride as any)?.otpVerified]);
 
   useEffect(() => {
-    const st = ride?.status;
+    const st = String(ride?.status ?? "");
     const prev = prevStatus.current;
     const pendingStatuses = ["searching", "bargaining"];
     if (st && !pendingStatuses.includes(st) && pendingStatuses.includes(prev)) {
@@ -333,7 +333,7 @@ export function RideTracker({
   }, [ride?.status, noDriversConfirmed, elapsed >= 180]);
 
   useEffect(() => {
-    const status = ride?.status;
+    const status = String(ride?.status ?? "searching");
     if (status !== "searching" && status !== "no_riders") return;
     let consecutiveErrors = 0;
     const poll = async () => {
@@ -476,7 +476,7 @@ export function RideTracker({
 
   if (!ride) return <RideStatusSkeleton />;
 
-  if (status === "bargaining") {
+  if (String(status) === "bargaining") {
     return (
       <NegotiationScreen
         rideId={rideId}
@@ -717,7 +717,7 @@ export function RideTracker({
               {[
                 { lbl: tl("vehicleLabel"), val: ({ bike: tl("bike"), car: tl("car"), rickshaw: tl("rickshaw"), daba: tl("daba"), school_shift: tl("schoolShift") } as Record<string, string>)[rideType] ?? rideType },
                 { lbl: tl("distance"), val: `${parseFloat(String(ride?.distance ?? 0)).toFixed(1)} km` },
-                { lbl: tl("payment"), val: ride?.paymentMethod === "wallet" ? tl("paymentWallet") : ride?.paymentMethod === "jazzcash" ? tl("paymentJazzCash") : ride?.paymentMethod === "easypaisa" ? tl("paymentEasyPaisa") : tl("paymentCashLabel") },
+                { lbl: tl("payment"), val: String(ride?.paymentMethod) === "wallet" ? tl("paymentWallet") : String(ride?.paymentMethod) === "jazzcash" ? tl("paymentJazzCash") : String(ride?.paymentMethod) === "easypaisa" ? tl("paymentEasyPaisa") : tl("paymentCashLabel") },
                 { lbl: tl("driver"), val: ride?.riderName || tl("ajkDriver") },
               ].map((r) => (
                 <View key={r.lbl} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
